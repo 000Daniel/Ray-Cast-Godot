@@ -40,15 +40,16 @@ if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
 ```
 The result contains this information:
-```css
-Vector2 position - the position where the ray collided.
-Vector2 normal - which side the collided object's surface(face) is facing.
-Object collider - the object the ray collided with.
-ObjectID collider_id - object's id
-RID rid - object's rid.
-int shape - object's shape index.
-int face_index - object's face_index.
-```
+|Type|Information|Description|
+|---|---|---|
+|Vector2|position|the position where the ray collided.|
+|Vector2|normal|which side the collided object's surface(face) is facing.|
+|Object|collider|the object the ray collided with.|
+|ObjectID|collider_id|object's id|
+|RID|rid|object's rid.|
+|int|shape|object's shape index.|
+|int|face_index|object's face_index.|
+
 ## Exclude Collision
 When shooting a ray from inside an object the ray will detect its collision. In a scenario where we shoot a ray forward from a player's camera this will become an issue since the ray will detect the player, to avoid this we will use the Exclude property of our ray query:
 ```css
@@ -61,6 +62,7 @@ public override void _PhysicsProcess(double delta)
 }
 ```
 The exceptions array can contain objects or RIDs.
+Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.
 
 ## Collision Mask
 In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks, in this example we ignore layer 2:
@@ -138,6 +140,9 @@ Make sure to cast the ray inside a _PhysicsProcess method.
 
 Ray detects my player collision:
 Set an exclusion to your ray, read the "Exclude Collision" paragraph.
+
+GetRid() does not exist in the current context
+Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.
 
 Is there an easier way to calculate Layer Masks?
 Not that I know of, but you can reference the main object's layers.
