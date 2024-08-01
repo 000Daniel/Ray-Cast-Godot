@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    {% include head-custom.html %}
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <a href="000Daniel.github.io" style="padding:10px,10px;">Home</a>
+          <ul>
+            
+          </ul>
+        </nav>
+      </div><!-- <li class="fork"><a href="{{ site.github.repository_url }}">View On GitHub</a></li> -->
+
+    <div class="wrapper">
+      <section>
+        <div id="title">
+          
+          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+          <p>{{ site.description | default: site.github.project_tagline }}</p>
+          <hr>
+          {{ content }}
+          <hr>
+          <span class="credits center">Please report any errors over to the relevant GitHub repository.<br></span>
+          <span class="credits center">Documentation maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
+        <nav>
+          
+        </nav>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
