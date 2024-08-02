@@ -44,6 +44,7 @@ if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
 ```
 The result contains this information:
+
 | head1        | head two          | three |
 |:-------------|:------------------|:------|
 | ok           | good swedish fish | nice  |
@@ -60,6 +61,7 @@ The result contains this information:
 |RID|rid|object's rid.|
 |int|shape|object's shape index.|
 |int|face_index|object's face_index.|
+
 </br>
 
 ## Exclude Collision
@@ -93,7 +95,7 @@ public override void _PhysicsProcess(double delta)
 Every layer in a collision mask/layer is represented by a bit, we will focus on two ways to calculate in code which layers we need:
 ### Calculate with Powers of Two:
 Every layer could be represented with 2 by the power of the layer's number(layer count starts at 0):
-```css
+```cs
 Layer 1 is 2^0 = 1
 Layer 2 is 2^1 = 2
 Layer 3 is 2^2 = 4
@@ -102,7 +104,9 @@ Layer 4 is 2^3 = 8
 If we add all the layers together we will get 4294967295 in decimal.
 To ignore layers 2, 3 and 4 for example we will calculate: 4294967295 - 2 - 4 - 8, which equals to 4294967281.
 So now we can do:
+```cs
 query.CollisionMask = 4294967281;
+```
 
 ### Calculate using bit shifting in a bitmask:
 To represent all layers we will write:
