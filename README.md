@@ -1,16 +1,16 @@
 <p align="center" width="100%">
-    <h1 align="center"> Introduction <img id="header-img" src="assets/CsharpLogo_s.png" width="3%" style="padding: 0px 5px;"> <img id="header-img" src="assets/GodotLogo_s.png" width="3%" style="padding: 0px 5px;"></h1>
+    <h1 align="center"> Introduction <img id="header-img" src="assets/CsharpLogo_s.png" width="4%" style="padding: 0px 5px;"> <img id="header-img" src="assets/GodotLogo_s.png" width="4%" style="padding: 0px 5px;"></h1>
 </p>
 
-Ray cast represents a two points line that intersects 3D objects, and returns information about the closest object along its path.
-This document will focus on how to cast a ray in 3D space, read its result information, and how to cast a ray from a 3D camera.
+Ray cast is projecting a line from one point to the other, it returns information about the closest object along its path.
+This page will focus on how to cast a 3D ray, how to cast a 3D ray forward from a 3D camera and how to read the ray's result information.
 
 <p align="center" width="100%">
 <img src="assets/RayCastGraphic.png" width="40%">
 </p>
 
 ## 3D Space
-Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html).
+Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html). <br>
 Before casting a ray we need to reference this class:
 ```cs
 public override void _PhysicsProcess(double delta)
@@ -23,7 +23,7 @@ spaceState represents the interactions of objects and their state in our World3D
 <br>
 
 ## Ray Query
-To represent the ray and its properties we will use a physics ray query:
+To represent the ray and its properties we will use a [PhysicsRayQueryParameters3D](https://docs.godotengine.org/en/latest/classes/class_physicsrayqueryparameters3d.html):
 ```cs
 public override void _PhysicsProcess(double delta)
 {
@@ -44,7 +44,8 @@ public override void _PhysicsProcess(double delta)
     var result = spaceState.IntersectRay(query);
 }
 ```
-The result is a [dictionary](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0) which contains information about the collider it collided with. If the ray didn't collide with anything the result will be empty.
+The result is a [dictionary](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0) which contains information about the collider it collided with.<br>
+If the ray didn't collide with anything the result will be empty.
 ```cs
 if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
@@ -60,12 +61,13 @@ if (result.Count > 0)
 |ObjectID|collider_id|object's id|
 |RID|rid|object's rid.|
 |int|shape|object's shape index.|
-|int|face_index|object's face_index.|
+|int|face_index|object's face index.|
 
 <br>
 
 ## Exclude Collision
-When shooting a ray from inside an object the ray will detect its collision. In a scenario where we shoot a ray forward from a player's camera this will become an issue since the ray will detect the player, to avoid this we will use the Exclude property of our ray query:
+When shooting a ray from inside an object the ray will detect its collision.<br>
+If we shoot a ray forward from a player's camera the ray will detect the player,<br>to avoid this we will use the Exclude property of our ray query:
 ```cs
 public override void _PhysicsProcess(double delta)
 {
@@ -75,13 +77,14 @@ public override void _PhysicsProcess(double delta)
     var result = spaceState.IntersectRay(query);
 }
 ```
-The exceptions array can contain objects or RIDs.
+The exceptions array can contain objects or RIDs.<br>
 Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.
 
 <br>
 
 ## Collision Mask
-In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks, in this example we ignore layer 2:
+In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks.<br>
+In this example we ignore layer 2:
 ```cs
 public override void _PhysicsProcess(double delta)
 {
@@ -104,8 +107,8 @@ Layer 2 is 2^1 = 2
 Layer 3 is 2^2 = 4
 Layer 4 is 2^3 = 8
 ```
-If we add all the layers together we will get 4294967295 in decimal.
-To ignore layers 2, 3 and 4 for example we will calculate: 4294967295 - 2 - 4 - 8, which equals to 4294967281.
+If we add all the layers together we will get 4294967295 in decimal.<br>
+To ignore layers 2, 3 and 4 for example we will calculate: 4294967295 - 2 - 4 - 8, which equals to 4294967281.<br>
 So now we can do:
 ```cs
 query.CollisionMask = 4294967281;
@@ -122,12 +125,12 @@ Now we can decide what layers to ignore by shifting bits(layer count starts at 0
 ```
 To get layers we will do:
 
-|Layer|In code|
-|---|---|
-|1|~(1 << 0)|
-|2|~(1 << 1)|
-|3|~(1 << 2)|
-|4|~(1 << 3)|
+```cs
+Layer 1 is ~(1 << 0)
+Layer 2 is ~(1 << 1)
+Layer 3 is ~(1 << 2)
+Layer 4 is ~(1 << 3)
+```
 
 Ignore only layer 2:
 ```cs
@@ -145,7 +148,7 @@ query.CollisionMask = (uint)CollisionLayers;
 
 <br>
 
-## Cast a ray from Camera3D forward
+## Cast a ray forward from Camera3D
 ```cs
 using Godot;
 
@@ -164,29 +167,30 @@ public partial class RayCast : CharacterBody3D
     }
 }
 ```
-If you are making an FPS don't forget to set the exception property so your ray won't intersect with your CharacterBody3D.
+Don't forget to set the exception property so your ray won't intersect with your CharacterBody3D's collision.
 
 <br>
 
 ## Issues and Fixes
-Ray won't cast or it produces an error:
-Make sure to cast the ray inside a _PhysicsProcess method.
+- The ray won't cast or it produces an error:<br>
+Make sure to cast the ray inside a _PhysicsProcess() method.<br>
 
-Ray casts to the side from my 3D camera:
-Change the cameraDirection's GlobalBasis.
+- The ray casts to the side from my 3D camera:<br>
+Change the cameraDirection's GlobalBasis.<br>
 
-Ray detects my player collision:
-Set an exclusion to your ray, read the "Exclude Collision" paragraph.
+- The ray detects the player's collision:<br>
+Set an exclusion to your ray, read the "Exclude Collision" section.<br>
 
-GetRid() does not exist in the current context:
-Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.
+- Error: 'GetRid()' does not exist in the current context:<br>
+Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.<br>
+Alternatively you can reference your node as a CharacterBody3D or StaticBody3D.<br>
 
-Is there an easier way to calculate Layer Masks?
-Not that I know of, but you can reference the main object's layers.
+- Is there an easier way to calculate Layer Masks?<br>
+Not that I know of, but you can reference the your CharacterBody3D's layers.<br>
 
 <br>
 
-### Extra refrences
+### Extra references
 [Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting) <br>
 [Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html) <br>
 [Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks) <br>
