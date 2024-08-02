@@ -1,8 +1,9 @@
 <p align="center" width="100%">
-<img src="assets/RayCastGraphic.png" width="40%" style="padding: 0px 0px;">
+<img src="assets/RayCastGraphic.png" width="40%">
 </p>
 
 ## Introduction <img id="header-img" src="assets/CsharpLogo.png" width="3%" style="padding: 0px 5px;"> <img id="header-img" src="assets/GodotLogo.png" width="3%" style="padding: 0px 5px;">
+
 Ray cast represents a two points line that intersects 3D objects, and returns information about the closest object along its path.
 This document will focus on how to cast a ray in 3D space, read its result information, and how to cast a ray from a 3D camera.
 
