@@ -19,7 +19,7 @@ spaceState represents the interactions of objects and their state in our World3D
 </br>
 ## Ray Query
 To represent the ray and its properties we will use a physics ray query:
-```js
+```cs
 public override void _PhysicsProcess(double delta)
 {
     var spaceState = GetWorld3D().DirectSpaceState;
@@ -30,7 +30,7 @@ public override void _PhysicsProcess(double delta)
 
 ## Result
 Now we can finally cast the ray query inside our spaceState:
-```css
+```cs
 public override void _PhysicsProcess(double delta)
 {
     var spaceState = GetWorld3D().DirectSpaceState;
@@ -39,7 +39,7 @@ public override void _PhysicsProcess(double delta)
 }
 ```
 The result is a dictionary(link) which contains information about the collider it collided with. If the ray didn't collide with anything the result will be empty.
-```css
+```cs
 if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
 ```
@@ -57,7 +57,7 @@ The result contains this information:
 
 ## Exclude Collision
 When shooting a ray from inside an object the ray will detect its collision. In a scenario where we shoot a ray forward from a player's camera this will become an issue since the ray will detect the player, to avoid this we will use the Exclude property of our ray query:
-```css
+```cs
 public override void _PhysicsProcess(double delta)
 {
     var spaceState = GetWorld3D().DirectSpaceState;
@@ -72,7 +72,7 @@ Note: the 'GetRid()' method only works in classes that inherit from classes like
 </br>
 ## Collision Mask
 In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks, in this example we ignore layer 2:
-```css
+```cs
 public override void _PhysicsProcess(double delta)
 {
     var spaceState = GetWorld3D().DirectSpaceState;
@@ -103,7 +103,7 @@ To represent all layers we will write:
 int CollisionLayers = ~0;
 ```
 Now we can decide what layers to ignore by shifting bits(layer count starts at 0):
-```css
+```cs
 ~(base_bitmask << layer)
 ```
 To get layers we will do:
@@ -115,13 +115,13 @@ To get layers we will do:
 |4|~(1 << 3)|
 
 Ignore only layer 2:
-```css
+```cs
 int CollisionLayers = ~0;
 CollisionLayers = CollisionLayers & ~(1 << 1);
 query.CollisionMask = (uint)CollisionLayers;
 ```
 Ignore layers 8 and 16:
-```css
+```cs
 int CollisionLayers = ~0;
 CollisionLayers &= ~((1 << 7) | (1 << 15));
 query.CollisionMask = (uint)CollisionLayers;
@@ -129,7 +129,7 @@ query.CollisionMask = (uint)CollisionLayers;
 More about shifting bits(link)
 
 ### Cast a ray from Camera3D forward
-```css
+```cs
 using Godot;
 
 public partial class RayCast : CharacterBody3D
