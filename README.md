@@ -75,8 +75,10 @@ public override void _PhysicsProcess(double delta)
 ```
 The exceptions array can contain objects or RIDs.
 Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.
+
 </br>
 </br>
+
 ## Collision Mask
 In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks, in this example we ignore layer 2:
 ```cs
@@ -136,7 +138,7 @@ int CollisionLayers = ~0;
 CollisionLayers &= ~((1 << 7) | (1 << 15));
 query.CollisionMask = (uint)CollisionLayers;
 ```
-More about shifting bits(link)
+[More about shifting bits](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
 
 ### Cast a ray from Camera3D forward
 ```cs
