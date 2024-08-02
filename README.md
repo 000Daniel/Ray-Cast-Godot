@@ -32,7 +32,7 @@ public override void _PhysicsProcess(double delta)
 }
 ```
 
-</br>
+<br>
 
 ## Result
 Now we can finally cast the ray query inside our spaceState:
@@ -62,7 +62,7 @@ if (result.Count > 0)
 |int|shape|object's shape index.|
 |int|face_index|object's face_index.|
 
-</br>
+<br>
 
 ## Exclude Collision
 When shooting a ray from inside an object the ray will detect its collision. In a scenario where we shoot a ray forward from a player's camera this will become an issue since the ray will detect the player, to avoid this we will use the Exclude property of our ray query:
@@ -78,7 +78,7 @@ public override void _PhysicsProcess(double delta)
 The exceptions array can contain objects or RIDs.
 Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.
 
-</br>
+<br>
 
 ## Collision Mask
 In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks, in this example we ignore layer 2:
@@ -91,7 +91,7 @@ public override void _PhysicsProcess(double delta)
 }
 ```
 
-</br>
+<br>
 
 ## Calculate Collision Mask's Layers
 Every layer in a collision mask/layer is represented by a bit, we will focus on two ways to calculate in code which layers we need:
@@ -143,7 +143,7 @@ query.CollisionMask = (uint)CollisionLayers;
 ```
 [More about shifting bits](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
 
-</br>
+<br>
 
 ## Cast a ray from Camera3D forward
 ```cs
@@ -166,7 +166,7 @@ public partial class RayCast : CharacterBody3D
 ```
 If you are making an FPS don't forget to set the exception property so your ray won't intersect with your CharacterBody3D.
 
-</br>
+<br>
 
 ## Issues and Fixes
 Ray won't cast or it produces an error:
@@ -184,9 +184,9 @@ Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.
 Is there an easier way to calculate Layer Masks?
 Not that I know of, but you can reference the main object's layers.
 
-</br>
+<br>
 
 ### Extra refrences
-[Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting) </br>
-[Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html) </br>
-[Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks) </br>
+[Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting) <br>
+[Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html) <br>
+[Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks) <br>
