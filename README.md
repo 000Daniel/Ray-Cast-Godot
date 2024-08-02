@@ -103,7 +103,7 @@ query.CollisionMask = 4294967281;
 
 ### Calculate using bit shifting in a bitmask:
 To represent all layers we will write:
-```css
+```cs
 int CollisionLayers = ~0;
 ```
 Now we can decide what layers to ignore by shifting bits(layer count starts at 0):
