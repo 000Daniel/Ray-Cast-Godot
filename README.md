@@ -4,7 +4,7 @@
 Ray cast represents a two points line that intersects 3D objects, and returns information about the closest object along its path.
 This document will focus on how to cast a ray in 3D space, read its result information, and how to cast a ray from a 3D camera.
 
-</br>
+<br>
 
 ## 3D Space
 Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html).
@@ -17,7 +17,7 @@ public override void _PhysicsProcess(double delta)
 ```
 spaceState represents the interactions of objects and their state in our World3D.
 
-</br>
+<br>
 
 ## Ray Query
 To represent the ray and its properties we will use a physics ray query:
