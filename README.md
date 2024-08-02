@@ -158,10 +158,13 @@ If you are making an FPS don't forget to set the exception property so your ray 
 Ray won't cast or it produces an error:
 Make sure to cast the ray inside a _PhysicsProcess method.
 
+Ray casts to the side from my 3D camera:
+Change the cameraDirection's GlobalBasis.
+
 Ray detects my player collision:
 Set an exclusion to your ray, read the "Exclude Collision" paragraph.
 
-GetRid() does not exist in the current context
+GetRid() does not exist in the current context:
 Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.
 
 Is there an easier way to calculate Layer Masks?
