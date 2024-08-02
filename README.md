@@ -6,7 +6,7 @@ This document will focus on how to cast a ray in 3D space, read its result infor
 </br>
 </br>
 ## 3D Space
-Every 3D component in godot is automatically assigned to the World3D(link) class.
+Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html).
 Before casting a ray we need to reference this class:
 ```cs
 public override void _PhysicsProcess(double delta)
