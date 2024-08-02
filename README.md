@@ -176,3 +176,8 @@ Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.
 
 Is there an easier way to calculate Layer Masks?
 Not that I know of, but you can reference the main object's layers.
+
+### Extra refrences
+[Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting)
+[Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html)
+[Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks)
