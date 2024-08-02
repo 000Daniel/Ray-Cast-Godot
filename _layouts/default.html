@@ -28,7 +28,10 @@
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
           <p>{{ site.description | default: site.github.project_tagline }}</p>
           <hr>
-          <p style="text-align: left">{{ content }}</p>
+        </div>
+        {{ content }}
+        <div id="title">
+          
           <hr>
           <span class="credits center">Please report any errors over to the relevant GitHub repository.<br></span>
           <span class="credits center">Documentation maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
