@@ -8,7 +8,7 @@ This document will focus on how to cast a ray in 3D space, read its result infor
 ## 3D Space
 Every 3D component in godot is automatically assigned to the World3D(link) class.
 Before casting a ray we need to reference this class:
-```css
+```cs
 public override void _PhysicsProcess(double delta)
 {
     var spaceState = GetWorld3D().DirectSpaceState;
@@ -19,7 +19,7 @@ spaceState represents the interactions of objects and their state in our World3D
 </br>
 ## Ray Query
 To represent the ray and its properties we will use a physics ray query:
-```css
+```js
 public override void _PhysicsProcess(double delta)
 {
     var spaceState = GetWorld3D().DirectSpaceState;
@@ -45,7 +45,7 @@ if (result.Count > 0)
 ```
 The result contains this information:
 |Type|Information|Description|
-|---|---|---|
+|:---|:---|:---|
 |Vector2|position|the position where the ray collided.|
 |Vector2|normal|which side the collided object's surface(face) is facing.|
 |Object|collider|the object the ray collided with.|
