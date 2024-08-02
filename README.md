@@ -1,4 +1,5 @@
-<img id="header-img" src="assets/CsharpLogo.png" width="36" height="40" style="float: center; padding: 0px 0px;" alt=""><img id="header-img" src="assets/GodotLogo.png" width="40" height="40" style="float: center; padding: 0px 0px;" alt="">
+
+<img id="header-img" src="assets/CsharpLogo.png" width="36" height="40" style="padding: 0px 0px;" alt="centered image">
 
 ## Introduction
 Ray cast represents a two points line that intersects 3D objects, and returns information about the closest object along its path.
