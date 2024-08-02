@@ -3,8 +3,10 @@
 ## Introduction
 Ray cast represents a two points line that intersects 3D objects, and returns information about the closest object along its path.
 This document will focus on how to cast a ray in 3D space, read its result information, and how to cast a ray from a 3D camera.
+
 </br>
 </br>
+
 ## 3D Space
 Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html).
 Before casting a ray we need to reference this class:
@@ -15,8 +17,10 @@ public override void _PhysicsProcess(double delta)
 }
 ```
 spaceState represents the interactions of objects and their state in our World3D.
+
 </br>
 </br>
+
 ## Ray Query
 To represent the ray and its properties we will use a physics ray query:
 ```cs
@@ -26,6 +30,7 @@ public override void _PhysicsProcess(double delta)
     var query = PhysicsRayQueryParameters3D.Create(Vector3.Zero, new Vector3(0,0,50));
 }
 ```
+
 </br>
 
 ## Result
@@ -38,7 +43,7 @@ public override void _PhysicsProcess(double delta)
     var result = spaceState.IntersectRay(query);
 }
 ```
-The result is a dictionary(link) which contains information about the collider it collided with. If the ray didn't collide with anything the result will be empty.
+The result is a [dictionary](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0) which contains information about the collider it collided with. If the ray didn't collide with anything the result will be empty.
 ```cs
 if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
