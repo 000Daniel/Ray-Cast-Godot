@@ -44,6 +44,13 @@ if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
 ```
 The result contains this information:
+| head1        | head two          | three |
+|:-------------|:------------------|:------|
+| ok           | good swedish fish | nice  |
+| out of stock | good and plenty   | nice  |
+| ok           | good `oreos`      | hmm   |
+| ok           | good `zoute` drop | yumm  |
+
 |Type|Information|Description|
 |:---|:---|:---|
 |Vector2|position|the position where the ray collided.|
