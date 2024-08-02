@@ -5,7 +5,6 @@ Ray cast represents a two points line that intersects 3D objects, and returns in
 This document will focus on how to cast a ray in 3D space, read its result information, and how to cast a ray from a 3D camera.
 
 </br>
-</br>
 
 ## 3D Space
 Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html).
@@ -18,7 +17,6 @@ public override void _PhysicsProcess(double delta)
 ```
 spaceState represents the interactions of objects and their state in our World3D.
 
-</br>
 </br>
 
 ## Ray Query
@@ -48,7 +46,8 @@ The result is a [dictionary](https://learn.microsoft.com/en-us/dotnet/api/system
 if (result.Count > 0)
     GD.Print("Hit at point: ", result["position"]);
 ```
-The result contains this information:
+
+### Result Information:
 
 |Type|Information|Description|
 |:---|:---|:---|
@@ -77,7 +76,6 @@ The exceptions array can contain objects or RIDs.
 Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.
 
 </br>
-</br>
 
 ## Collision Mask
 In some cases using the Exception property could become inconvenient when excluding a lot of objects, so instead we can use collision masks, in this example we ignore layer 2:
@@ -89,10 +87,12 @@ public override void _PhysicsProcess(double delta)
     query.CollisionMask = 4294967295 - 2;
 }
 ```
+
 </br>
 
 ## Calculate Collision Mask's Layers
 Every layer in a collision mask/layer is represented by a bit, we will focus on two ways to calculate in code which layers we need:
+
 ### Calculate with Powers of Two:
 Every layer could be represented with 2 by the power of the layer's number(layer count starts at 0):
 ```cs
@@ -140,7 +140,9 @@ query.CollisionMask = (uint)CollisionLayers;
 ```
 [More about shifting bits](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
 
-### Cast a ray from Camera3D forward
+</br>
+
+## Cast a ray from Camera3D forward
 ```cs
 using Godot;
 
@@ -161,6 +163,8 @@ public partial class RayCast : CharacterBody3D
 ```
 If you are making an FPS don't forget to set the exception property so your ray won't intersect with your CharacterBody3D.
 
+</br>
+
 ## Issues and Fixes
 Ray won't cast or it produces an error:
 Make sure to cast the ray inside a _PhysicsProcess method.
@@ -177,7 +181,9 @@ Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.
 Is there an easier way to calculate Layer Masks?
 Not that I know of, but you can reference the main object's layers.
 
+</br>
+
 ### Extra refrences
-[Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting)
-[Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html)
-[Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks)
+[Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting) </br>
+[Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html) </br>
+[Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks) </br>
