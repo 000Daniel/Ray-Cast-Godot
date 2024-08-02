@@ -1,13 +1,13 @@
 <p align="center" width="100%">
-<img src="assets/RayCastGraphic.png" width="40%">
+    <h1 align="center"> Introduction <img id="header-img" src="assets/CsharpLogo_s.png" width="3%" style="padding: 0px 5px;"> <img id="header-img" src="assets/GodotLogo_s.png" width="3%" style="padding: 0px 5px;"></h1>
 </p>
-
-## Introduction <img id="header-img" src="assets/CsharpLogo.png" width="3%" style="padding: 0px 5px;"> <img id="header-img" src="assets/GodotLogo.png" width="3%" style="padding: 0px 5px;">
 
 Ray cast represents a two points line that intersects 3D objects, and returns information about the closest object along its path.
 This document will focus on how to cast a ray in 3D space, read its result information, and how to cast a ray from a 3D camera.
 
-<br>
+<p align="center" width="100%">
+<img src="assets/RayCastGraphic.png" width="40%">
+</p>
 
 ## 3D Space
 Every 3D component in godot is automatically assigned to the [World3D class](https://docs.godotengine.org/en/stable/classes/class_world3d.html).
