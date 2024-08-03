@@ -217,3 +217,5 @@ Use if statements to validate your types.<br> Incase that is not an option, you 
 [Godot Ray-Casting](https://docs.godotengine.org/en/3.1/tutorials/physics/ray-casting.html?highlight=Ray%20casting) <br>
 [Godot RayCast3D](https://docs.godotengine.org/en/stable/classes/class_raycast3d.html) <br>
 [Godot Collision Physics](https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html#collision-layers-and-masks) <br>
+
+{{site.date}}
