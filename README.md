@@ -206,7 +206,7 @@ Change your script's class inheritance to CharacterBody3D or StaticBody3D etc'.<
 Alternatively you can reference your node as a CharacterBody3D or StaticBody3D.<br>
 
 - Is there an easier way to calculate Layer Masks?<br>
-Not that I know of, but you can reference the your CharacterBody3D's layers.<br>
+Not that I know of, but you can reference your CharacterBody3D's layers/collision mask.<br>
 
 - Sometimes I receive errors and some other times I don't, how do I get rid of the errors?<br>
 Use if statements to validate your types.<br> Incase that is not an option, you can do [Exception handling](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements) to ignore the errors.<br> **Exception handling should be done only if you know what you are doing!**
