@@ -18,7 +18,7 @@ public override void _PhysicsProcess(double delta)
     var spaceState = GetWorld3D().DirectSpaceState;
 }
 ```
-spaceState represents the interactions of objects and their state in our World3D.
+*spaceState represents the interactions of objects and their state in our World3D.*
 
 <br>
 
@@ -66,8 +66,8 @@ if (result.Count > 0)
 <br>
 
 ## Exclude Collision
-When shooting a ray from inside an object the ray will detect its collision.<br>
-If we shoot a ray forward from a player's camera the ray will detect the player,<br>to avoid this we will use the Exclude property of our ray query:
+When shooting a ray from inside an object the ray *will* detect its collision.<br>
+To avoid this issue we can use the Exclude property of our ray query:
 ```cs
 public override void _PhysicsProcess(double delta)
 {
@@ -77,8 +77,8 @@ public override void _PhysicsProcess(double delta)
     var result = spaceState.IntersectRay(query);
 }
 ```
-The exceptions array can contain objects or RIDs.<br>
-Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.
+*The exceptions array can contain objects or RIDs.* <br>
+*Note: the 'GetRid()' method only works in classes that inherit from classes like CharacterBody3D, StaticBody3D and more.*
 
 <br>
 
@@ -100,7 +100,7 @@ public override void _PhysicsProcess(double delta)
 Every layer in a collision mask/layer is represented by a bit, we will focus on two ways to calculate in code which layers we need:
 
 ### Calculate with Powers of Two:
-Every layer could be represented with 2 by the power of the layer's number(layer count starts at 0):
+Every layer could be represented with 2 by the power of the layer's number *(layer count starts at 0)*:
 ```cs
 Layer 1 is 2^0 = 1
 Layer 2 is 2^1 = 2
@@ -119,13 +119,11 @@ To represent all layers we will write:
 ```cs
 int CollisionLayers = ~0;
 ```
-Now we can decide what layers to ignore by shifting bits(layer count starts at 0):
+Now we can decide what layers to ignore by shifting bits *(layer count starts at 0)*:
 ```cs
 ~(base_bitmask << layer)
-```
-To get layers we will do:
 
-```cs
+Example:
 Layer 1 is ~(1 << 0)
 Layer 2 is ~(1 << 1)
 Layer 3 is ~(1 << 2)
@@ -144,7 +142,7 @@ int CollisionLayers = ~0;
 CollisionLayers &= ~((1 << 7) | (1 << 15));
 query.CollisionMask = (uint)CollisionLayers;
 ```
-[More about shifting bits](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
+[More about bit shifting](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
 
 <br>
 
@@ -167,7 +165,29 @@ public partial class RayCast : CharacterBody3D
     }
 }
 ```
-Don't forget to set the exception property so your ray won't intersect with your CharacterBody3D's collision.
+*Don't forget to set the exception property so your ray won't intersect with your CharacterBody3D's collision.*
+
+<br>
+
+## Get the ray's intersected object
+To get the object that the ray hit we will do: 
+```cs
+Node object = (Node)result["collider"];
+```
+To Get a specific type we can change 'Node' to something else:
+```cs
+GD.Print(((StaticBody3D)result["collider"]).Name);
+```
+**BUT in this case if the object isn't a StaticBody3D, this will throw an excception** <br>
+So instead of directly converting the type we can use the ['as' operator](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast): <br>
+```cs
+StaticBody3D staticObject = (Node)result["collider"] as StaticBody3D;
+
+if (staticObject != null)
+	GD.Print(staticObject.Name);
+```
+The 'as' operator is a safer method, it produces a null if the object cannot be converted. <br>
+Note: to check if an object can be converted you *can* use the ['is' operator](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast).<br>
 
 <br>
 
