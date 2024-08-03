@@ -172,13 +172,13 @@ public partial class RayCast : CharacterBody3D
 ## Get the ray's intersected object
 To get the object that the ray hit we will do: 
 ```cs
-Node object = (Node)result["collider"];
+Node obj = (Node)result["collider"];
 ```
 To Get a specific type we can change 'Node' to something else:
 ```cs
 GD.Print(((StaticBody3D)result["collider"]).Name);
 ```
-**BUT in this case if the object isn't a StaticBody3D, this will throw an excception** <br>
+**BUT in this case if the object isn't a StaticBody3D, this will throw an exception** <br>
 So instead of directly converting the type we can use the ['as' operator](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast): <br>
 ```cs
 StaticBody3D staticObject = (Node)result["collider"] as StaticBody3D;
@@ -186,7 +186,7 @@ StaticBody3D staticObject = (Node)result["collider"] as StaticBody3D;
 if (staticObject != null)
 	GD.Print(staticObject.Name);
 ```
-The 'as' operator is a safer method, it produces a null if the object cannot be converted. <br>
+The 'as' operator is a safer method, it produces a *null* if the object cannot be converted. <br>
 Note: to check if an object can be converted you *can* use the ['is' operator](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast).<br>
 
 <br>
@@ -207,6 +207,9 @@ Alternatively you can reference your node as a CharacterBody3D or StaticBody3D.<
 
 - Is there an easier way to calculate Layer Masks?<br>
 Not that I know of, but you can reference the your CharacterBody3D's layers.<br>
+
+- Sometimes I receive errors and some other times I don't, how do I get rid of the errors?<br>
+Use if statements to validate your types.<br> Incase that is not an option, you can do [Exception handling](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements) to ignore the errors.<br> **Exception handling should be done only if you know what you are doing!**
 
 <br>
 
