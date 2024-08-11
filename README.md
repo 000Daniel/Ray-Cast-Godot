@@ -133,7 +133,7 @@ To Get a specific type we can change 'Node' to something else:
 ```cs
 GD.Print(((StaticBody3D)result["collider"]).Name);
 ```
-**BUT in this case if the object isn't a StaticBody3D, this will throw an exception** <br>
+**BUT in this case if the object isn't a StaticBody3D, this will throw an exception.** <br>
 So instead of directly converting the type we can use the ['as' operator](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast): <br>
 ```cs
 StaticBody3D staticObject = (Node)result["collider"] as StaticBody3D;
