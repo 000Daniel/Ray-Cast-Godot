@@ -96,53 +96,8 @@ public override void _PhysicsProcess(double delta)
 
 <br>
 
-## Calculate Collision Mask's Layers
-Every layer in a collision mask/layer is represented by a bit, we will focus on two ways to calculate in code which layers we need:
-
-### Calculate with Powers of Two:
-Every layer could be represented with 2 by the power of the layer's number *(layer count starts at 0)*:
-```cs
-Layer 1 is 2^0 = 1
-Layer 2 is 2^1 = 2
-Layer 3 is 2^2 = 4
-Layer 4 is 2^3 = 8
-```
-If we add all the layers together we will get 4294967295 in decimal.<br>
-To ignore layers 2, 3 and 4 for example we will calculate: 4294967295 - 2 - 4 - 8, which equals to 4294967281.<br>
-So now we can do:
-```cs
-query.CollisionMask = 4294967281;
-```
-
-### Calculate using bit shifting in a bitmask:
-To represent all layers we will write:
-```cs
-int CollisionLayers = ~0;
-```
-Now we can decide what layers to ignore by shifting bits *(layer count starts at 0)*:
-```cs
-~(base_bitmask << layer)
-
-Example:
-Layer 1 is ~(1 << 0)
-Layer 2 is ~(1 << 1)
-Layer 3 is ~(1 << 2)
-Layer 4 is ~(1 << 3)
-```
-
-Ignore only layer 2:
-```cs
-int CollisionLayers = ~0;
-CollisionLayers = CollisionLayers & ~(1 << 1);
-query.CollisionMask = (uint)CollisionLayers;
-```
-Ignore layers 8 and 16:
-```cs
-int CollisionLayers = ~0;
-CollisionLayers &= ~((1 << 7) | (1 << 15));
-query.CollisionMask = (uint)CollisionLayers;
-```
-[More about bit shifting](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
+## Calculate Collision Masks and Layers
+[Our documentation on how to calculate collision masks and collision layers](https://000daniel.github.io/Collision-Mask-Layer/).
 
 <br>
 
