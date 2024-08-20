@@ -55,8 +55,8 @@ if (result.Count > 0)
 
 |Type|Information|Description|
 |:---|:---|:---|
-|Vector2|position|the position where the ray collided.|
-|Vector2|normal|which side the collided object's surface(face) is facing.|
+|Vector3|position|the position where the ray collided.|
+|Vector3|normal|which side the collided object's surface(face) is facing.|
 |Object|collider|the object the ray collided with.|
 |ObjectID|collider_id|object's id|
 |RID|rid|object's rid.|
